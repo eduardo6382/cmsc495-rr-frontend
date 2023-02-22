@@ -32,36 +32,28 @@ export default function App() {
           exact
           path="/recipe/:id"
           element={
-            <WithPrivateRoute>
               <RecipeDetail />
-            </WithPrivateRoute>
           }
         />
         <Route
           exact
           path="/recipe/create"
           element={
-            <WithPrivateRoute>
               <RecipeCreate />
-            </WithPrivateRoute>
           }
         />
         <Route
           exact
           path="/recipe/:id/edit"
           element={
-            <WithPrivateRoute>
               <RecipeEdit />
-            </WithPrivateRoute>
           }
         />
 
         <Route
           path="dashboard"
           element={
-            <WithPrivateRoute>
               <Dashboard />
-            </WithPrivateRoute>
           }
         >
           <Route path="profile" element={<Profile />} />
