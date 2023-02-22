@@ -8,7 +8,6 @@ import Recipes from "./components/recipe/Recipes";
 import RecipeDetail from "./components/recipe/RecipeDetail";
 import RecipeCreate from "./components/recipe/RecipeCreate";
 import RecipeEdit from "./components/recipe/RecipeEdit";
-import WithPrivateRoute from "./utils/WithPrivateRoute";
 import Dashboard from "./components/layouts/Dashboard";
 
 import Profile from "./components/accounts/Profile";
