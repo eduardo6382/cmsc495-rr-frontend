@@ -10,7 +10,6 @@ import {
   ClockIcon,
 } from "@heroicons/react/outline";
 
-import { likeRecipe, saveRecipe } from "../../redux/actions/recipes";
 
 export default function QuickView({ open, setOpen, id }) {
   const { recipes, is_loading } = useSelector((state) => state.recipes);
@@ -111,43 +110,6 @@ export default function QuickView({ open, setOpen, id }) {
                         aria-labelledby="options-heading"
                         className="mt-2"
                       >
-                        <div className="flex sm:flex-col1">
-                          <button
-                            type="button"
-                            className="group py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
-                            onClick={() => {
-                              dispatch(saveRecipe(recipe[0].author, id));
-                              setBookmark(bookmark + 1);
-                            }}
-                          >
-                            <BookmarkIcon
-                              className="h-6 w-6 flex-shrink-0"
-                              aria-hidden="true"
-                            />
-                            <p className="hidden ml-1 group-hover:block">
-                              Save
-                            </p>
-                            <span className="ml-2">{bookmark}</span>
-                          </button>
-                          <button
-                            type="button"
-                            className="group py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
-                            onClick={() => {
-                              dispatch(likeRecipe(id));
-                              setLike(like + 1);
-                            }}
-                          >
-                            <HeartIcon
-                              className="h-6 w-6 flex-shrink-0"
-                              aria-hidden="true"
-                            />
-                            <p className="hidden ml-1 group-hover:block">
-                              Like
-                            </p>
-                            <span className="ml-2">{like}</span>
-                          </button>
-                        </div>
-
                         <div className="flex justify-between">
                           <div className="inline-flex items-center text-teal-600 border py-1 px-2 mt-3 border-transparent bg-teal-50 rounded-md">
                             <ClockIcon className="h-8 w-8 text-teal-600 pr-1" />{" "}
