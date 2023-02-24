@@ -10,13 +10,13 @@ export default function RecipeCard({ recipes, quickview }) {
   const [id, setId] = useState(null);
 
   const dispatch = useDispatch();
-
+console.log(recipes)
   return (
     <>
       <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {recipes.map((recipe) => (
           <div
-            key={recipe.title}
+            key={recipe._id}
             className="bg-white overflow-hidden shadow rounded-lg"
           >
             <div className="p-5">
@@ -24,21 +24,17 @@ export default function RecipeCard({ recipes, quickview }) {
                 <div className="w-0 flex-1">
                   <dl>
                     <dt>
-                      <div>
-                        <img
-                          src={recipe.picture}
-                          className="object-cover w-full h-48"
-                          alt=""
-                        />
+                      <div className="text-lg font-medium text-gray-500 truncate">
+                      {recipe.name}
                       </div>
                     </dt>
                     <div className="mt-4 flex justify-between md:mt-2">
-                      <dt className="text-lg font-medium text-gray-500 truncate">
-                        {recipe.title}
-                      </dt>
                       <dt className="text-xs font-light border border-gray-200 p-1 rounded-lg text-gray-500 truncate">
                         by {recipe.username}
                       </dt>
+                    </div>
+                    <div className="mt-4 flex justify-between md:mt-2">
+                      {recipe.description}
                     </div>
                     <dd>
                       <div className="text-sm text-gray-900">{recipe.desc}</div>
@@ -54,14 +50,14 @@ export default function RecipeCard({ recipes, quickview }) {
                     className="font-medium text-teal-700 hover:text-teal-900"
                     onClick={() => {
                       setOpen(true);
-                      setId(recipe.id);
+                      setId(recipe._id);
                     }}
                   >
                     Quick View
                   </button>
                 ) : (
                   <Link
-                    to={`/recipe/${recipe.id}`}
+                    to={`/recipe/${recipe._id}`}
                     className="font-medium text-teal-700 hover:text-teal-900"
                   >
                     View detail
