@@ -5,10 +5,8 @@ import { Link } from "react-router-dom";
 
 import { Disclosure } from "@headlessui/react";
 import {
-  HeartIcon,
   MinusSmIcon,
   PlusSmIcon,
-  BookmarkIcon,
   PencilIcon,
   TrashIcon,
   ClockIcon,
@@ -16,8 +14,6 @@ import {
 
 import {
   getDetailRecipe,
-  likeRecipe,
-  saveRecipe,
 } from "../../redux/actions/recipes";
 import RecipeDelete from "./RecipeDelete";
 
@@ -130,39 +126,6 @@ export default function RecipeDetail() {
                     className="text-base text-gray-700 space-y-6"
                     dangerouslySetInnerHTML={{ __html: detailRecipe.desc }}
                   />
-                </div>
-
-                <div className="mt-2 flex sm:flex-col1">
-                  <button
-                    type="button"
-                    className="group py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
-                    onClick={() =>
-                      dispatch(saveRecipe(detailRecipe.author, id))
-                    }
-                  >
-                    <BookmarkIcon
-                      className="h-6 w-6 flex-shrink-0"
-                      aria-hidden="true"
-                    />
-                    <p className="hidden ml-1 group-hover:block">Save</p>
-                    <span className="ml-2">
-                      {detailRecipe.total_number_of_bookmarks}
-                    </span>
-                  </button>
-                  <button
-                    type="button"
-                    className="group py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
-                    onClick={() => dispatch(likeRecipe(id))}
-                  >
-                    <HeartIcon
-                      className="h-6 w-6 flex-shrink-0"
-                      aria-hidden="true"
-                    />
-                    <p className="hidden ml-1 group-hover:block">Like</p>
-                    <span className="ml-2">
-                      {detailRecipe.total_number_of_likes}
-                    </span>
-                  </button>
                 </div>
 
                 <div className="inline-flex items-center text-teal-600 border py-1 px-2 mt-3 border-transparent bg-teal-50 rounded-md">

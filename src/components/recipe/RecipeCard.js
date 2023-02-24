@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { HeartIcon, BookmarkIcon } from "@heroicons/react/outline";
-import { likeRecipe, saveRecipe } from "../../redux/actions/recipes";
 
 import QuickView from "./QuickView";
 
@@ -69,60 +68,10 @@ export default function RecipeCard({ recipes, quickview }) {
                   </Link>
                 )}
               </div>
-
-              <div className="flex space-x-2">
-                <button type="button">
-                  <HeartIcon
-                    className="h-6 w-6 text-gray-400 "
-                    aria-hidden="true"
-                    onClick={() => {
-                      dispatch(likeRecipe(id));
-                    }}
-                  />
-                </button>
-
-                <div className="w-px h-6 bg-gray-400" />
-                <button type="button">
-                  <BookmarkIcon
-                    className="h-6 w-6 text-gray-400"
-                    aria-hidden="true"
-                    onClick={() => {
-                      dispatch(saveRecipe(recipe.author, id));
-                    }}
-                  />
-                </button>
-              </div>
             </div>
           </div>
         ))}
       </div>
-      {/* Pagination */}
-      {/* <nav
-        className="bg-white mt-10 px-4 pt-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
-        aria-label="Pagination"
-      >
-        <div className="hidden sm:block">
-          <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">1</span> to{" "}
-            <span className="font-medium">10</span> of{" "}
-            <span className="font-medium">20</span> results
-          </p>
-        </div>
-        <div className="flex-1 flex justify-between sm:justify-end">
-          <a
-            href="/"
-            className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-          >
-            Previous
-          </a>
-          <a
-            href="/"
-            className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-          >
-            Next
-          </a>
-        </div>
-      </nav> */}
       {open && <QuickView open={open} setOpen={setOpen} id={id} />}
     </>
   );
