@@ -8,7 +8,6 @@ import Recipes from "./components/recipe/Recipes";
 import RecipeDetail from "./components/recipe/RecipeDetail";
 import RecipeCreate from "./components/recipe/RecipeCreate";
 import RecipeEdit from "./components/recipe/RecipeEdit";
-import WithPrivateRoute from "./utils/WithPrivateRoute";
 import Dashboard from "./components/layouts/Dashboard";
 
 import Profile from "./components/accounts/Profile";
@@ -32,36 +31,28 @@ export default function App() {
           exact
           path="/recipe/:id"
           element={
-            <WithPrivateRoute>
               <RecipeDetail />
-            </WithPrivateRoute>
           }
         />
         <Route
           exact
           path="/recipe/create"
           element={
-            <WithPrivateRoute>
               <RecipeCreate />
-            </WithPrivateRoute>
           }
         />
         <Route
           exact
           path="/recipe/:id/edit"
           element={
-            <WithPrivateRoute>
               <RecipeEdit />
-            </WithPrivateRoute>
           }
         />
 
         <Route
           path="dashboard"
           element={
-            <WithPrivateRoute>
               <Dashboard />
-            </WithPrivateRoute>
           }
         >
           <Route path="profile" element={<Profile />} />
