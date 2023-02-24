@@ -14,7 +14,7 @@ export default function Landing() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getRecipes());
-  });
+  }, [dispatch]);
 
 
   const { recipes, is_loading } = useSelector((state) => state.recipes);
