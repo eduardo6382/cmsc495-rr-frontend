@@ -1,11 +1,7 @@
 import {
-  CHANGE_AVATAR,
   CHANGE_PASSWORD,
-  EDIT_USER,
-  GET_AVATAR,
   GET_ERRORS,
   GET_SAVED_RECIPES,
-  GET_USER_RECIPES,
   RECIPE_LOADING,
   USER_LOADED,
   USER_LOADING,
@@ -21,27 +17,6 @@ export const loadUser = () => (dispatch, getState) => {
     .then((res) => {
       dispatch({
         type: USER_LOADED,
-        payload: res.data,
-      });
-    })
-    .catch((err) => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response,
-      });
-    });
-};
-
-export const editUser = (username, email) => (dispatch, getState) => {
-  dispatch({ type: USER_LOADING });
-
-  const body = JSON.stringify({ username, email });
-
-  axiosInstance
-    .put("/user/", body, tokenConfig(getState))
-    .then((res) => {
-      dispatch({
-        type: EDIT_USER,
         payload: res.data,
       });
     })

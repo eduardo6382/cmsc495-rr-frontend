@@ -10,7 +10,6 @@ import RecipeCreate from "./components/recipe/RecipeCreate";
 import RecipeEdit from "./components/recipe/RecipeEdit";
 import Dashboard from "./components/layouts/Dashboard";
 
-import MyRecipes from "./components/recipe/MyRecipes";
 import SavedRecipes from "./components/recipe/SavedRecipes";
 
 import ErrorDiv from "./components/layouts/ErrorDiv";
@@ -54,7 +53,6 @@ export default function App() {
               <Dashboard />
           }
         >
-          <Route path="myRecipes" element={<MyRecipes />} />
           <Route path="savedRecipes" element={<SavedRecipes />} />
         </Route>
       </Routes>
