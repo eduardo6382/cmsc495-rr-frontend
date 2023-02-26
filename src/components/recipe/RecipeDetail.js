@@ -32,7 +32,7 @@ export default function RecipeDetail() {
 
   useEffect(() => {
     dispatch(getDetailRecipe(id));
-  }, []);
+  }, [dispatch, id]);
 
   if (!detailRecipe || detailRecipe.length === 0)
     return (
@@ -43,8 +43,9 @@ export default function RecipeDetail() {
       </div>
     );
 
-  const procedures = JSON.parse(detailRecipe.procedure);
-  const ingredients = JSON.parse(detailRecipe.ingredients);
+    console.log(detailRecipe);
+  const procedures = detailRecipe.response.directions;
+  const ingredients = detailRecipe.response.ingredients;
 
   const recipe = {
     details: [
@@ -65,23 +66,12 @@ export default function RecipeDetail() {
         <main className="max-w-7xl mx-auto sm:pt-16 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto lg:max-w-none">
             <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
-              <div className="flex flex-col-reverse">
-                <div className="w-full aspect-w-1 aspect-h-1">
-                  <div>
-                    <img
-                      src={detailRecipe.picture}
-                      alt=""
-                      className="w-full h-full object-center object-cover sm:rounded-lg"
-                    />
-                  </div>
-                </div>
-              </div>
-
+              
               {/* Recipe info */}
               <div className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
                 <div className="flex sm:flex-col1">
                   <h1 className="flex text-3xl font-extrabold tracking-tight text-gray-900">
-                    {detailRecipe.title}
+                    {detailRecipe.response.name}
                   </h1>
 
                   <Link to={`/recipe/${id}/edit/`}>
@@ -116,21 +106,17 @@ export default function RecipeDetail() {
                 <div className="mt-3">
                   <h2 className="sr-only">Recipe information</h2>
                   <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-teal-600 ">
-                    {detailRecipe.category.name}
+                    {//remove this area?
+                    }
                   </span>
                 </div>
 
                 <div className="mt-6">
                   <h3 className="sr-only">Description</h3>
                   <div
-                    className="text-base text-gray-700 space-y-6"
-                    dangerouslySetInnerHTML={{ __html: detailRecipe.desc }}
-                  />
-                </div>
-
-                <div className="inline-flex items-center text-teal-600 border py-1 px-2 mt-3 border-transparent bg-teal-50 rounded-md">
-                  <ClockIcon className="h-8 w-8 text-teal-600 pr-1" />{" "}
-                  <span className="font-medium">{detailRecipe.cook_time}</span>
+                    className="text-base text-gray-700 space-y-6">
+                      {detailRecipe.response.description}
+                    </div>
                 </div>
 
                 <section aria-labelledby="details-heading" className="mt-12">
@@ -138,6 +124,7 @@ export default function RecipeDetail() {
                     Additional details
                   </h2>
                   <div className="border-t divide-y divide-gray-200">
+                    {console.log(recipe.details)}
                     {recipe.details.map((detail) => (
                       <Disclosure as="div" key={detail.name}>
                         {({ open }) => (

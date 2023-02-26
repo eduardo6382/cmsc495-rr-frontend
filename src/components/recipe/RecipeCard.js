@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { HeartIcon, BookmarkIcon } from "@heroicons/react/outline";
 
 import QuickView from "./QuickView";
 
@@ -9,7 +7,6 @@ export default function RecipeCard({ recipes, quickview }) {
   const [open, setOpen] = useState(false);
   const [id, setId] = useState(null);
 
-  const dispatch = useDispatch();
 console.log(recipes)
   return (
     <>
