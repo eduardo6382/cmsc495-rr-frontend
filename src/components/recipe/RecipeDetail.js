@@ -104,7 +104,6 @@ export default function RecipeDetail() {
                 </div>
 
                 <div className="mt-3">
-                  <h2 className="sr-only">Recipe information</h2>
                   <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-teal-600 ">
                     {//remove this area?
                     }
@@ -112,7 +111,6 @@ export default function RecipeDetail() {
                 </div>
 
                 <div className="mt-6">
-                  <h3 className="sr-only">Description</h3>
                   <div
                     className="text-base text-gray-700 space-y-6">
                       {detailRecipe.response.description}
@@ -120,9 +118,6 @@ export default function RecipeDetail() {
                 </div>
 
                 <section aria-labelledby="details-heading" className="mt-12">
-                  <h2 id="details-heading" className="sr-only">
-                    Additional details
-                  </h2>
                   <div className="border-t divide-y divide-gray-200">
                     {console.log(recipe.details)}
                     {recipe.details.map((detail) => (
