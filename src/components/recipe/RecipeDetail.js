@@ -54,7 +54,7 @@ export default function RecipeDetail() {
         items: ingredients,
       },
       {
-        name: "Procedures",
+        name: "Directions",
         items: procedures,
       },
     ],
@@ -101,13 +101,6 @@ export default function RecipeDetail() {
                       Delete Recipe
                     </p>
                   </button>
-                </div>
-
-                <div className="mt-3">
-                  <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-teal-600 ">
-                    {//remove this area?
-                    }
-                  </span>
                 </div>
 
                 <div className="mt-6">
@@ -160,9 +153,16 @@ export default function RecipeDetail() {
                                 >
                                   <dl>
                                     <div className="bg-gray-50 px-4 py-5  sm:px-6">
-                                      <dt className="text-sm font-normal text-gray-500">
+                                      {(detail.name === 'Ingredients') && 
+                                        <dt className="text-sm font-normal text-gray-500">
+                                        {idx + 1}) {item.ingredient}
+                                      </dt>
+                                      }
+                                      {(detail.name === 'Directions') && 
+                                        <dt className="text-sm font-normal text-gray-500">
                                         {idx + 1}) {item}
                                       </dt>
+                                      }
                                     </div>
                                   </dl>
                                 </div>
