@@ -10,7 +10,7 @@ export default function RecipeEdit() {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const { recipes, is_loading } = useSelector((state) => state.recipes);
+  const { recipes } = useSelector((state) => state.recipes);
 
   const recipe = recipes.filter((recipe) => recipe.id === parseInt(id));
 

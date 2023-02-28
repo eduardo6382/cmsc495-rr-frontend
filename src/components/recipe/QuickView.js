@@ -1,25 +1,20 @@
-import { Fragment, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { Fragment } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { Dialog, Transition } from "@headlessui/react";
 import {
   XIcon,
-  HeartIcon,
-  BookmarkIcon,
   ClockIcon,
 } from "@heroicons/react/outline";
 
 
 export default function QuickView({ open, setOpen, id }) {
-  const { recipes, is_loading } = useSelector((state) => state.recipes);
+  const { recipes } = useSelector((state) => state.recipes);
 
-  const dispatch = useDispatch();
 
   const recipe = recipes.filter((recipe) => recipe.id === id);
 
-  const [like, setLike] = useState(recipe[0].total_number_of_likes);
-  const [bookmark, setBookmark] = useState(recipe[0].total_number_of_bookmarks);
 
   return (
     <>

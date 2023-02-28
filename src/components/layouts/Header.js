@@ -1,34 +1,22 @@
-import { Fragment, useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Menu, Popover, Transition } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/solid";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 
 import Logout from "../accounts/Logout";
-import { loadUser, getAvatar } from "../../redux/actions/user";
-
-const userNavigation = [{ name: "Dashboard", to: "/dashboard" }];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import { loadUser } from "../../redux/actions/user";
 
 export default function Header() {
   const { token } = useSelector((state) => state.auth);
-  const { user, avatar } = useSelector((state) => state.user);
-
-  const [modal, setModal] = useState(false);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (token) {
       dispatch(loadUser());
-      dispatch(getAvatar());
     }
-  }, [token]);
+  }, [dispatch, token]);
 
   return (
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

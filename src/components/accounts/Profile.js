@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { PencilIcon } from "@heroicons/react/solid";
 
 import {
-  editUser,
   changePassword,
   changeAvatar,
 } from "../../redux/actions/user";
@@ -106,17 +105,6 @@ export default function Profile() {
               </div>
             </div>
           </div>
-          <button
-            type="button"
-            className="inline-flex justify-center mt-2 px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
-            onClick={() => dispatch(editUser(username, email))}
-          >
-            <PencilIcon
-              className="-ml-1 mr-2 h-5 w-5 text-gray-400"
-              aria-hidden="true"
-            />
-            <span>Update</span>
-          </button>
         </div>
       </div>
 
