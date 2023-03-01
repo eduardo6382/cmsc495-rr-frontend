@@ -42,6 +42,8 @@ export default function (state = initialState, action) {
         ...state,
         is_loading: false,
         recipes: null,
+        detailRecipe: null,
+        likedRecipe: null,
       };
     case CREATE_RECIPE:
       return {

@@ -4,6 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationIcon } from "@heroicons/react/outline";
 
 import { logout } from "../../redux/actions/auth";
+import { clearRecipes } from "../../redux/actions/recipes";
 
 export default function Logout({ modal, setModal }) {
   const cancelButtonRef = useRef(null);
@@ -19,9 +20,8 @@ export default function Logout({ modal, setModal }) {
 
   const handleLogoutClick = () => {
     dispatch(
-      logout({
-        refresh: JSON.parse(localStorage.getItem("recipe")).refresh,
-      })
+      logout(),
+      clearRecipes()
     );
   };
 

@@ -17,6 +17,15 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
+      localStorage.setItem("recipe", JSON.stringify(action.payload.tokens));
+      return {
+        ...state,
+        ...action.payload,
+        isAuthenticated: true,
+        isLoading: false,
+        token: action.payload.tokens,
+        user: action.payload.currentUser
+      };
     case REGISTER_SUCCESS:
       localStorage.setItem("recipe", JSON.stringify(action.payload.tokens));
       return {
@@ -25,9 +34,18 @@ export default function (state = initialState, action) {
         isAuthenticated: true,
         isLoading: false,
         token: action.payload.tokens,
+        user: action.payload.currentUser
       };
     case LOGIN_FAIL:
     case LOGOUT_SUCCESS:
+      localStorage.removeItem("recipe");
+      return {
+        ...state,
+        token: null,
+        user: null,
+        isAuthenticated: false,
+        isLoading: false,
+      };
     case REGISTER_FAIL:
       localStorage.removeItem("recipe");
       return {

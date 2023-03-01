@@ -1,9 +1,20 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { MailIcon } from "@heroicons/react/solid";
 
 export default function Dashboard() {
-  const { user, avatar } = useSelector((state) => state.user);
+  // const { user, avatar } = useSelector((state) => state.user);
+  const { avatar } = useSelector((state) => state.user);
+
+  const navigate = useNavigate();
+  const { token, user } = useSelector((state) => state.auth);
+  
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+  }, [token]);
 
   return (
     <>
@@ -36,6 +47,7 @@ export default function Dashboard() {
               <div>
                 <div className="flex items-center">
                   <h1 className="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">
+                    {/* Welcome back, {user && user.username} */}
                     Welcome back, {user && user.username}
                   </h1>
                 </div>
@@ -46,7 +58,7 @@ export default function Dashboard() {
                       className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                       aria-hidden="true"
                     />
-                    {user && user.email}
+                    {/* {user && user.email} */}
                   </dd>
                 </dl>
               </div>

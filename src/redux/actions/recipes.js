@@ -6,20 +6,22 @@ import {
   CREATE_RECIPE,
   EDIT_RECIPE,
   DELETE_RECIPE,
+  CLEAR_RECIPE,
 } from "./types";
 import axiosInstance from "../../utils/axios";
 import { tokenConfig } from "./auth";
 
+const config = {
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": localStorage.getItem("recipe") ? localStorage.getItem("recipe").slice(1, localStorage.getItem("recipe").length -1): undefined // this is a hack, but for some reason extra quotes are making this unauthorized
+  },
+};
+
 export const getRecipes = () => (dispatch) => {
   dispatch({ type: RECIPE_LOADING });
-
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
   axiosInstance
-    .get("/recipes", null, config)
+    .get("/recipes", config)
     .then((res) => {
       dispatch({
         type: GET_RECIPES,
@@ -38,7 +40,7 @@ export const getDetailRecipe = (id) => (dispatch, getState) => {
   dispatch({ type: RECIPE_LOADING });
 
   axiosInstance
-    .get(`/recipes/${id}/`, tokenConfig(getState))
+    .get(`/recipes/${id}/`, config)
     .then((res) => {
       dispatch({
         type: GET_DETAIL_RECIPE,
@@ -108,4 +110,12 @@ export const deleteRecipe = (id) => (dispatch, getState) => {
         payload: err.response,
       });
     });
+};
+
+export const clearRecipes =
+  () =>
+  (dispatch, getState) => {
+    dispatch({
+      type: CLEAR_RECIPE
+    })
 };

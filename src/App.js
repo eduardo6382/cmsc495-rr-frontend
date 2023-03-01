@@ -9,6 +9,7 @@ import RecipeDetail from "./components/recipe/RecipeDetail";
 import RecipeCreate from "./components/recipe/RecipeCreate";
 import RecipeEdit from "./components/recipe/RecipeEdit";
 import Dashboard from "./components/layouts/Dashboard";
+import WithPrivateRoute from "./utils/WithPrivateRoute";
 
 import SavedRecipes from "./components/recipe/SavedRecipes";
 
@@ -29,28 +30,36 @@ export default function App() {
           exact
           path="/recipe/:id"
           element={
+            <WithPrivateRoute>
               <RecipeDetail />
+            </WithPrivateRoute>
           }
         />
         <Route
           exact
           path="/recipe/create"
           element={
+            <WithPrivateRoute>
               <RecipeCreate />
+            </WithPrivateRoute>
           }
         />
         <Route
           exact
           path="/recipe/:id/edit"
           element={
-              <RecipeEdit />
+            <WithPrivateRoute>
+            <RecipeEdit />
+          </WithPrivateRoute>
           }
         />
 
         <Route
           path="dashboard"
           element={
+            <WithPrivateRoute>
               <Dashboard />
+            </WithPrivateRoute>
           }
         >
           <Route path="savedRecipes" element={<SavedRecipes />} />

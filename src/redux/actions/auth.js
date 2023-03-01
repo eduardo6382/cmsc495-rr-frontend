@@ -10,7 +10,7 @@ import {
 import axiosInstance from "../../utils/axios";
 
 export const register =
-  ({ username, email, password, confirmPassword }) =>
+  ({ username, password, confirmPassword }) =>
   (dispatch) => {
     const config = {
       headers: {
@@ -21,12 +21,11 @@ export const register =
     if (password === confirmPassword) {
       const body = JSON.stringify({
         username,
-        email,
         password,
       });
 
       axiosInstance
-        .post("/user/register/", body, config)
+        .post("/auth/register", body, config)
         .then((res) => {
           dispatch({
             type: REGISTER_SUCCESS,
@@ -58,7 +57,7 @@ export const register =
   };
 
 export const login =
-  ({ email, password }) =>
+  ({ username, password }) =>
   (dispatch) => {
     const config = {
       headers: {
@@ -66,10 +65,10 @@ export const login =
       },
     };
 
-    const body = JSON.stringify({ email, password });
+    const body = JSON.stringify({ username, password });
 
     axiosInstance
-      .post("/user/login/", body, config)
+      .post("/auth/login", body, config)
       .then((res) => {
         dispatch({
           type: LOGIN_SUCCESS,
@@ -92,23 +91,11 @@ export const login =
   };
 
 export const logout =
-  ({ refresh }) =>
+  () =>
   (dispatch, getState) => {
-    const body = JSON.stringify({ refresh });
-
-    axiosInstance
-      .post("/user/logout/", body, tokenConfig(getState))
-      .then((res) => {
-        dispatch({
-          type: LOGOUT_SUCCESS,
-        });
-      })
-      .catch((err) => {
-        dispatch({
-          type: GET_ERRORS,
-          payload: err.response,
-        });
-      });
+    dispatch({
+      type: LOGOUT_SUCCESS
+    })
   };
 
 export const tokenConfig = (getState) => {

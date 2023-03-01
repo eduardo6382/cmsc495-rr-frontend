@@ -1,24 +1,23 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-
 import RecipeCard from "../recipe/RecipeCard";
-
-// will need when auth introduced
-//import { getSavedRecipes } from "../../redux/actions/user";
-import { getRecipes } from "../../redux/actions/recipes";
-
+import { getRecipes, clearRecipes } from "../../redux/actions/recipes";
 
 export default function Landing() {
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getRecipes());
-  }, [dispatch]);
-
-
+  const { token } = useSelector((state) => state.auth);
   const { recipes, is_loading } = useSelector((state) => state.recipes);
-  console.log(recipes)
+
+  useEffect(() => {
+    if(!token) {
+      dispatch(clearRecipes())
+    } else {
+      dispatch(getRecipes())
+    }
+  }, [dispatch, token]);
+
   if (!recipes)
     return (
       <div className="px-4 py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-15">

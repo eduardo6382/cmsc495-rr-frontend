@@ -6,7 +6,7 @@ import { login } from "../../redux/actions/auth";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const { token } = useSelector((state) => state.auth);
@@ -23,7 +23,7 @@ export default function Login() {
     e.preventDefault();
     dispatch(
       login({
-        email: email,
+        username: username,
         password: password,
       })
     );
@@ -40,19 +40,19 @@ export default function Login() {
           </div>
           <form className="mt-8 space-y-6" onSubmit={handleFormSubmit}>
             <div className="rounded-md shadow-sm -space-y-px">
-              <div>
-                <label htmlFor="email-address" className="sr-only">
-                  Email Address
+            <div>
+                <label htmlFor="username" className="sr-only">
+                  Username
                 </label>
                 <input
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
+                  id="username"
+                  name="username"
+                  type="username"
+                  autoComplete="username"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
-                  placeholder="Email Address"
-                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="username"
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
               <div>
