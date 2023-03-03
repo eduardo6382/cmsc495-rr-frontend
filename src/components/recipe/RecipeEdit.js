@@ -13,10 +13,11 @@ export default function RecipeEdit() {
   console.log(id)
 
   const { recipes } = useSelector((state) => state.recipes);
-  console.log(recipes)
+  console.log("test:", recipes)
 
-  const recipe = recipes.filter((recipe) => recipe.id === parseInt(id));
+  const recipe = recipes.filter((recipe) => recipe._id === id);
 
+  console.log("is there a recipe?",recipe)
   const handleFormSubmit = (formData) => {
     dispatch(editRecipe(id, formData));
   };

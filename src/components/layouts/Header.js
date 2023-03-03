@@ -7,7 +7,6 @@ import { SearchIcon } from "@heroicons/react/solid";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
 import Logout from "../accounts/Logout";
-import { loadUser } from "../../redux/actions/user";
 
 
 function classNames(...classes) {
@@ -20,13 +19,6 @@ export default function Header() {
 
   const [modal, setModal] = useState(false);
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (token) {
-      dispatch(loadUser());
-    }
-  }, [token]);
 
   return (
     <>
