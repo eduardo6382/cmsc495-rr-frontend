@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 export default function RecipeCard({ recipes }) {
   return (
-    <>
       <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {recipes.map((recipe) => (
           <div
@@ -29,6 +28,7 @@ export default function RecipeCard({ recipes }) {
                 </div>
               </div>
             </div>
+            <div className="text-xs text-left pb-2 pl-2">Servings: {recipe.serves}</div>
             <div className="flex justify-between bg-gray-50 px-5 py-3">
               <div className="text-sm">
                   <Link
@@ -42,6 +42,5 @@ export default function RecipeCard({ recipes }) {
           </div>
         ))}
       </div>
-    </>
   );
 }
