@@ -48,7 +48,7 @@ export default function Landing() {
               <h2 className="text-lg leading-6 font-medium text-gray-900">
                 Saved Recipes
               </h2>
-              <RecipeCard recipes={recipes} quickview={false} />
+              <RecipeCard recipes={recipes} />
             </div>
           </div>
         </div>

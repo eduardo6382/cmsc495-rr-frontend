@@ -1,13 +1,7 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import QuickView from "./QuickView";
 
-export default function RecipeCard({ recipes, quickview }) {
-  const [open, setOpen] = useState(false);
-  const [id, setId] = useState(null);
-
-console.log(recipes)
+export default function RecipeCard({ recipes }) {
   return (
     <>
       <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -37,30 +31,17 @@ console.log(recipes)
             </div>
             <div className="flex justify-between bg-gray-50 px-5 py-3">
               <div className="text-sm">
-                {quickview ? (
-                  <button
-                    className="font-medium text-teal-700 hover:text-teal-900"
-                    onClick={() => {
-                      setOpen(true);
-                      setId(recipe._id);
-                    }}
-                  >
-                    Quick View
-                  </button>
-                ) : (
                   <Link
                     to={`/recipe/${recipe._id}`}
                     className="font-medium text-teal-700 hover:text-teal-900"
                   >
                     View detail
                   </Link>
-                )}
               </div>
             </div>
           </div>
         ))}
       </div>
-      {open && <QuickView open={open} setOpen={setOpen} id={id} />}
     </>
   );
 }
