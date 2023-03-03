@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function RecipeCreate(props) {
+  console.log(props)
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
 

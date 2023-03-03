@@ -7,10 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { editRecipe } from "../../redux/actions/recipes";
 
 export default function RecipeEdit() {
+  
   const dispatch = useDispatch();
   const { id } = useParams();
+  console.log(id)
 
   const { recipes } = useSelector((state) => state.recipes);
+  console.log(recipes)
 
   const recipe = recipes.filter((recipe) => recipe.id === parseInt(id));
 

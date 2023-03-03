@@ -8,18 +8,13 @@ import Recipes from "./components/recipe/Recipes";
 import RecipeDetail from "./components/recipe/RecipeDetail";
 import RecipeCreate from "./components/recipe/RecipeCreate";
 import RecipeEdit from "./components/recipe/RecipeEdit";
-import Dashboard from "./components/layouts/Dashboard";
 import WithPrivateRoute from "./utils/WithPrivateRoute";
 
-import SavedRecipes from "./components/recipe/SavedRecipes";
-
-import ErrorDiv from "./components/layouts/ErrorDiv";
 
 export default function App() {
   return (
     <Router>
       <Header />
-      <ErrorDiv />
       <Routes>
         <Route exact path="/" element={<Landing />} />
         <Route exact path="/register" element={<Register />} />
@@ -53,17 +48,6 @@ export default function App() {
           </WithPrivateRoute>
           }
         />
-
-        <Route
-          path="dashboard"
-          element={
-            <WithPrivateRoute>
-              <Dashboard />
-            </WithPrivateRoute>
-          }
-        >
-          <Route path="savedRecipes" element={<SavedRecipes />} />
-        </Route>
       </Routes>
     </Router>
   );
