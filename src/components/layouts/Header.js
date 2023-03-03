@@ -7,9 +7,7 @@ import { SearchIcon } from "@heroicons/react/solid";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
 import Logout from "../accounts/Logout";
-import { loadUser } from "../../redux/actions/user";
 
-const userNavigation = [{ name: "Dashboard", to: "/dashboard" }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -21,13 +19,6 @@ export default function Header() {
 
   const [modal, setModal] = useState(false);
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (token) {
-      dispatch(loadUser());
-    }
-  }, [token]);
 
   return (
     <>
@@ -114,21 +105,6 @@ export default function Header() {
                         leaveTo="transform opacity-0 scale-95"
                       >
                         <Menu.Items className="origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none">
-                          {userNavigation.map((item) => (
-                            <Menu.Item key={item.name}>
-                              {({ active }) => (
-                                <Link
-                                  to={item.to}
-                                  className={classNames(
-                                    active ? "bg-gray-100" : "",
-                                    "block py-2 px-4 text-sm text-gray-700"
-                                  )}
-                                >
-                                  {item.name}
-                                </Link>
-                              )}
-                            </Menu.Item>
-                          ))}
                           <Menu.Item>
                             <button
                               className="block py-2 px-4 text-sm text-gray-700"
@@ -223,15 +199,6 @@ export default function Header() {
                     </div>
                   </div>
                   <div className="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
-                    {userNavigation.map((item) => (
-                      <Link
-                        key={item.name}
-                        to={item.to}
-                        className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
                     <button
                       className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
                       onClick={() => setModal(true)}
