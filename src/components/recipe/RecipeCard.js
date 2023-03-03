@@ -26,11 +26,6 @@ console.log(recipes)
                       </div>
                     </dt>
                     <div className="mt-4 flex justify-between md:mt-2">
-                      <dt className="text-xs font-light border border-gray-200 p-1 rounded-lg text-gray-500 truncate">
-                        by {recipe.username}
-                      </dt>
-                    </div>
-                    <div className="mt-4 flex justify-between md:mt-2">
                       {recipe.description}
                     </div>
                     <dd>
