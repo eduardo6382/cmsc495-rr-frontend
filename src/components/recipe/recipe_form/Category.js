@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { RadioGroup } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/solid";
 
-import { addCategory } from "../../../redux/actions/forms";
+//import { addCategory } from "../../../redux/actions/forms";
 
 const categories = [
   {
@@ -39,9 +39,9 @@ export default function Category({ editMode, recipe }) {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  {/*useEffect(() => {
     dispatch(addCategory(selectedcategories));
-  }, [selectedcategories]);
+  }, [selectedcategories]);*/}
 
   return (
     <RadioGroup value={selectedcategories} onChange={setSelectedcategories}>
