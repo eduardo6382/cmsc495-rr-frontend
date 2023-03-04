@@ -1,8 +1,8 @@
 import {
-  ADD_CATEGORY,
+  //ADD_CATEGORY,
   ADD_COOKTIME,
   ADD_INGREDIENTS,
-  ADD_PICTURE,
+  //ADD_PICTURE,
   ADD_PROCEDURES,
 } from "./types";
 
@@ -27,16 +27,16 @@ export const addCooktime = (cook_time) => {
   };
 };
 
-export const addCategory = (category) => {
+/*export const addCategory = (category) => {
   return {
     type: ADD_CATEGORY,
     payload: category,
   };
-};
+};*/
 
-export const addPicture = (picture) => {
+/*export const addPicture = (picture) => {
   return {
     type: ADD_PICTURE,
     payload: picture,
   };
-};
+};*/

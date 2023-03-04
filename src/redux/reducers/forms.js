@@ -1,9 +1,9 @@
 /* eslint-disable import/no-anonymous-default-export */
 import {
-  ADD_CATEGORY,
+  //ADD_CATEGORY,
   ADD_COOKTIME,
   ADD_INGREDIENTS,
-  ADD_PICTURE,
+  //ADD_PICTURE,
   ADD_PROCEDURES,
 } from "../actions/types";
 
@@ -32,7 +32,7 @@ export default function (state = initialState, action) {
         ...state,
         cook_time: action.payload,
       };
-    case ADD_CATEGORY:
+    {/*case ADD_CATEGORY:
       return {
         ...state,
         category: action.payload,
@@ -41,8 +41,8 @@ export default function (state = initialState, action) {
       return {
         ...state,
         picture: action.payload,
-      };
+      };*/}
     default:
-      return state;
+    return state;
   }
 }

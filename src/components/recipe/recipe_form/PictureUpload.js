@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+/*import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { addPicture } from "../../../redux/actions/forms";
@@ -56,4 +56,4 @@ export default function PictureUpload() {
       </div>
     </div>
   );
-}
+}*/
