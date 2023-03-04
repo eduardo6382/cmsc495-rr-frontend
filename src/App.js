@@ -4,7 +4,6 @@ import Header from "./components/layouts/Header";
 import Register from "./components/accounts/Register";
 import Login from "./components/accounts/Login";
 import Landing from "./components/layouts/Landing";
-import Recipes from "./components/recipe/Recipes";
 import RecipeDetail from "./components/recipe/RecipeDetail";
 import RecipeCreate from "./components/recipe/RecipeCreate";
 import RecipeEdit from "./components/recipe/RecipeEdit";
@@ -20,7 +19,6 @@ export default function App() {
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/login" element={<Login />} />
 
-        <Route exact path="/recipe" element={<Recipes />} />
         <Route
           exact
           path="/recipe/:id"
