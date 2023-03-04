@@ -14,6 +14,7 @@ export default function RecipeEdit() {
     const [desc, setDesc] = useState('');
     const [directions, setDirections] = useState([]);
     const [ingredients, setIngredients] = useState([]);
+    const [notes, setNotes] = useState('');
 
     // track state for the items we can edit in the arrays
     const [editDir, setEditDir] = useState('');
@@ -41,21 +42,22 @@ export default function RecipeEdit() {
         setDesc(detailRecipe.response.description);
         setDirections(detailRecipe.response.directions);
         setIngredients(detailRecipe.response.ingredients);
+        setNotes(detailRecipe.response.notes);
     }, []);
 
     // submit the form
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
-        const formData = new FormData();
+        let request = {
+            name: title,
+            description: desc,
+            directions: directions,
+            ingredients: ingredients,
+            notes: notes
+        };
 
-        formData.append('name', title);
-        formData.append('description', desc);
-        formData.append('directions', JSON.stringify(directions));
-        formData.append('ingredients', JSON.stringify(ingredients));
-        formData.append('notes', 'test notes');
-
-        dispatch(editRecipe(id, formData));
+        dispatch(editRecipe(id, request));
     };
 
     // add to the directions array
