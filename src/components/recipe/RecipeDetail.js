@@ -31,23 +31,9 @@ export default function RecipeDetail() {
             </div>
         );
 
-    console.log(detailRecipe);
-    const procedures = detailRecipe.response.directions;
+    const directions = detailRecipe.response.directions;
     const ingredients = detailRecipe.response.ingredients;
     const servings = detailRecipe.response.serves;
-
-    const recipe = {
-        details: [
-            {
-                name: 'Ingredients',
-                items: ingredients
-            },
-            {
-                name: 'Directions',
-                items: procedures
-            }
-        ]
-    };
 
     return (
         <>
@@ -96,76 +82,70 @@ export default function RecipeDetail() {
                                         {detailRecipe.response.description}
                                     </div>
                                 </div>
-                                {/*map for all details*/}
-                                {recipe.details.map((detail) => (
-                                    /* title */
-                                    <>
-                                        <div className="group relative w-full py-6 flex justify-between items-center text-left">
-                                            <span className="text-teal-600 text-base font-medium">
-                                                {detail.name}
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <div className="table w-full">
-                                                <div class="table-header-group">
-                                                    <div class="table-row">
-                                                        <div class="table-cell text-left">
-                                                            Ingredient
-                                                        </div>
-                                                        <div class="table-cell text-left">
-                                                            Amount
-                                                        </div>
-                                                        <div class="table-cell text-left">
-                                                            Measurement
-                                                        </div>
-                                                    </div>
+                                {/*ingredients*/}
+                                {/* https://tailwindcss.com/docs/display#table */}
+                                <div className="group relative w-full py-6 flex justify-between items-center text-left">
+                                    <span className="text-teal-600 text-base font-medium">
+                                        Ingredients
+                                    </span>
+                                </div>
+                                <div>
+                                    <div className="table w-full">
+                                        <div class="table-header-group">
+                                            <div class="table-row">
+                                                <div class="table-cell text-left">
+                                                    Ingredient
                                                 </div>
-                                                <div class="table-row-group">
-                                                    {detail.items.map(
-                                                        (item, index) => {
-                                                            console.log(item);
-                                                            return (
-                                                                <>
-                                                                    {detail.name ===
-                                                                        'Ingredients' && (
-                                                                        <div class="table-row">
-                                                                            <div class="table-cell">
-                                                                                {
-                                                                                    item.ingredient
-                                                                                }
-                                                                            </div>
-                                                                            <div class="table-cell">
-                                                                                {
-                                                                                    item.measurement
-                                                                                }
-                                                                            </div>
-                                                                            <div class="table-cell">
-                                                                                {
-                                                                                    item.measurementType
-                                                                                }
-                                                                            </div>
-                                                                        </div>
-                                                                    )}
-                                                                    {detail.name ===
-                                                                        'Directions' && (
-                                                                        <dt className="text-sm font-normal text-gray-500">
-                                                                            {index +
-                                                                                1}
-                                                                            ){' '}
-                                                                            {
-                                                                                item
-                                                                            }
-                                                                        </dt>
-                                                                    )}
-                                                                </>
-                                                            );
-                                                        }
-                                                    )}
+                                                <div class="table-cell text-left">
+                                                    Amount
+                                                </div>
+                                                <div class="table-cell text-left">
+                                                    Measurement
                                                 </div>
                                             </div>
                                         </div>
-                                    </>
-                                ))}
+                                        <div class="table-row-group">
+                                            {ingredients.map((item, index) => {
+                                                console.log(item);
+                                                return (
+                                                    <>
+                                                        <div class="table-row">
+                                                            <div class="table-cell">
+                                                                {
+                                                                    item.ingredient
+                                                                }
+                                                            </div>
+                                                            <div class="table-cell">
+                                                                {
+                                                                    item.measurement
+                                                                }
+                                                            </div>
+                                                            <div class="table-cell">
+                                                                {
+                                                                    item.measurementType
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Directions */}
+                                <div className="group relative w-full py-6 flex justify-between items-center text-left">
+                                    <span className="text-teal-600 text-base font-medium">
+                                        Directions
+                                    </span>
+                                </div>
+                                {directions.map((item, index) => {
+                                    return (
+                                        <dt className="text-md font-normal">
+                                            {index + 1}) {item}
+                                        </dt>
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>
