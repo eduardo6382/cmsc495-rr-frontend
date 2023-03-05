@@ -2,6 +2,8 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { MinusIcon, PlusIcon } from '@heroicons/react/solid';
 
+import errors from '../../redux/reducers/errors';
+
 import { useParams } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -58,6 +60,7 @@ export default function RecipeEdit() {
         };
 
         dispatch(editRecipe(id, request));
+        alert('Recipe Edited!');
     };
 
     // add to the directions array
