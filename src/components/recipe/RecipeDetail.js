@@ -33,7 +33,8 @@ export default function RecipeDetail() {
 
     const directions = detailRecipe.response.directions;
     const ingredients = detailRecipe.response.ingredients;
-    const servings = detailRecipe.response.serves;
+    const servings = detailRecipe.response.Servings;
+    const notes = detailRecipe.response.notes;
 
     return (
         <>
@@ -76,7 +77,7 @@ export default function RecipeDetail() {
                                         </p>
                                     </button>
                                 </div>
-                                <div>Serves {servings}</div>
+                                <div>Servings: {servings}</div>
                                 <div className="mt-6">
                                     <div className="text-base text-gray-700 space-y-6">
                                         {detailRecipe.response.description}
@@ -142,10 +143,20 @@ export default function RecipeDetail() {
                                 {directions.map((item, index) => {
                                     return (
                                         <dt className="text-md font-normal">
-                                            {index + 1}) {item}
+                                            {index + 1} {item}
                                         </dt>
                                     );
                                 })}
+                                <div className="mt-6">
+                                    <div className="text-base text-gray-700 space-y-6">
+                                        <div className="group relative w-full py-6 flex justify-between items-center text-left">
+                                            <span className="text-teal-600 text-base font-medium">
+                                                Notes
+                                            </span>
+                                        </div>
+                                        {detailRecipe.response.notes}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

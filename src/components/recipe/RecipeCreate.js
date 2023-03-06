@@ -136,13 +136,13 @@ export default function RecipeCreate() {
                 <p className="px-5 text-sm text-gray-600">
                   "Cooking is like painting or writing a song. Just as there are
                   only so many notes or colors, there are only so many
-                  flavors—it’s how you combine them that sets you apart."
+                  flavors—it’s how you combine them that sets you apart." -Wolfgang Puck
                 </p>
               </div>
             </div>
             <form className="mt-5 md:mt-0 md:col-span-2" onSubmit={OnSubmit}>
               <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
-                
+
                 <div>
                   <h1 className="text-lg leading-6 font-medium text-gray-900">
                     Food Name
@@ -175,7 +175,7 @@ export default function RecipeCreate() {
                     />
                   </div>
                 </div>
-                
+
                 <div className="space-y-6">
 		              <div>
                     <h1 className="text-lg leading-6 font-medium text-gray-900">
@@ -249,7 +249,7 @@ export default function RecipeCreate() {
                     </div>
                   </div>
                 </div>
-                
+
                 <div>
                   <h1 className="text-lg leading-6 font-medium text-gray-900">
                     Ingredients
@@ -338,8 +338,9 @@ export default function RecipeCreate() {
                       value={servings}
                       onChange={onChangeServings}
                     />
-                    </div>
                   </div>
+                </div>
+
                 <div>
                   <h1 className="text-lg leading-6 font-medium text-gray-900">
                     Notes

@@ -101,7 +101,7 @@ export const deleteRecipe = (id) => (dispatch, getState) => {
     dispatch({ type: RECIPE_LOADING });
 
     axiosInstance
-        .delete(`/recipes/${id}/`, tokenConfig(getState))
+        .delete(`/recipes/${id}/`, config)
         .then((res) => {
             dispatch({
                 type: DELETE_RECIPE,
