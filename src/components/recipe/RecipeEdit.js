@@ -2,8 +2,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { MinusIcon, PlusIcon } from '@heroicons/react/solid';
 
-import errors from '../../redux/reducers/errors';
-
 import { useParams } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,6 +14,11 @@ export default function RecipeEdit() {
     const [desc, setDesc] = useState('');
     const [directions, setDirections] = useState([]);
     const [ingredients, setIngredients] = useState([]);
+    const [ingredientList, setIngredientList] = useState([]);
+    const [ingredientName, setIngredientName] = useState('');
+    const [ingredientAmount, setIngredientAmount] = useState('');
+    const [measurements, setMeasurements] = useState(['teaspoon', 'tablespoon', 'cups']);
+    const [measurement, setMeasurement] = useState('teaspoon');
     const [servings, setServings] = useState([]);
     const [notes, setNotes] = useState('');
 
@@ -28,14 +31,8 @@ export default function RecipeEdit() {
     //params for the passed in id
     const { id } = useParams();
 
-    console.log(id);
 
     const { detailRecipe } = useSelector((state) => state.recipes);
-    console.log('test:', detailRecipe);
-
-    const recipe = detailRecipe.response;
-
-    console.log('is there a recipe?', recipe);
 
     //useEffect to preload all data after the dispatch.
     //pass in empty array so useEffect only happens once
@@ -44,9 +41,14 @@ export default function RecipeEdit() {
         setTitle(detailRecipe.response.name);
         setDesc(detailRecipe.response.description);
         setDirections(detailRecipe.response.directions);
-        setIngredients(detailRecipe.response.ingredients);
         setServings(detailRecipe.response.Servings);
         setNotes(detailRecipe.response.notes);
+
+        for (let i = 0; i < detailRecipe.response.ingredients.length; i++){
+            const value = detailRecipe.response.ingredients[i].ingredient + " " + detailRecipe.response.ingredients[i].measurement + " " + detailRecipe.response.ingredients[i].measurementType;
+            ingredients.push(detailRecipe.response.ingredients[i]);
+            setIngredientList([...ingredientList, value]);
+        }
     }, []);
 
     // submit the form
@@ -73,6 +75,24 @@ export default function RecipeEdit() {
         setDirections((state) => [...state, editDir]);
         setEditDir('');
     };
+
+    const onAddIngredientClick = e => {
+        const value = ingredientName + " " + ingredientAmount + " " + measurement;
+        const valueObject = {
+            measurement: ingredientAmount,
+            measurementType: measurement,
+            ingredient: ingredientName
+        };
+        if (!ingredientList.includes(value)) {
+            setIngredientList([...ingredientList, value]);
+            ingredientList.push(valueObject);
+        }
+        else {
+            alert("Item already exists");
+        }
+        setIngredientName('');
+        setIngredientAmount('');
+    }
 
     return (
         <>
@@ -208,6 +228,9 @@ export default function RecipeEdit() {
                                                                         <button
                                                                             type="button"
                                                                             className="bg-white inline-flex items-center px-2 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+                                                                            onClick={() =>
+                                                                                setDirections(directions.filter((x) => x !== direction))
+                                                                            }
                                                                         >
                                                                             <MinusIcon
                                                                                 className="-ml-2 mr-1 h-5 w-5 text-gray-400"
@@ -226,92 +249,88 @@ export default function RecipeEdit() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="space-y-6">
-                                        <div>
-                                            <h1 className="text-lg leading-6 font-medium text-gray-900">
-                                                Ingredients
-                                            </h1>
-                                        </div>
-                                        <div className="space-y-2">
-                                            <div className="space-y-1">
-                                                <div className="flex">
-                                                    <div className="flex-grow">
-                                                        <textarea
-                                                            id="description"
-                                                            name="description"
-                                                            rows={1}
-                                                            className="block w-full shadow-sm p-2 focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm border border-gray-300 rounded-md"
-                                                            placeholder="..."
-                                                            value={editDir}
-                                                            onChange={(
-                                                                event
-                                                            ) => {
-                                                                setEditDir(
-                                                                    event.target
-                                                                        .value
-                                                                );
-                                                            }}
-                                                        />
-                                                    </div>
-                                                    <div className="ml-3">
-                                                        <button
-                                                            type="button"
-                                                            className="bg-white inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
-                                                            onClick={
-                                                                onAddDirectionClick
-                                                            }
-                                                        >
-                                                            <PlusIcon
-                                                                className="-ml-2 mr-1 h-5 w-5 text-gray-400"
-                                                                aria-hidden="true"
-                                                            />
-                                                            <span>Add</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="border-b border-gray-200">
-                                                <ul className="divide-y divide-gray-200">
-                                                    {directions.map(
-                                                        (direction, idx) => (
-                                                            <li
-                                                                key={direction}
-                                                                className="py-4 flex"
-                                                            >
-                                                                <div className="ml-3 flex flex-grow justify-between">
-                                                                    <div>
-                                                                        <span className="text-base font-medium text-gray-900">
-                                                                            {idx +
-                                                                                1}
-                                                                            ){' '}
-                                                                        </span>
-                                                                        <span className="text-base font-medium text-gray-900">
-                                                                            {
-                                                                                direction
-                                                                            }
-                                                                        </span>
-                                                                    </div>
+                                    <div>
+                                        <h1 className="text-lg leading-6 font-medium text-gray-900">
+                                            Ingredients
+                                        </h1>
+                                        <div className="flex">
+                                            <input
+                                                type="text"
+                                                id="ingredientName"
+                                                className="block shadow-sm p-2 focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm border border-gray-300 rounded-md"
+                                                placeholder="Ingredient(ex: flour)"
+                                                value={ingredientName}
+                                                onChange={(e) =>
+                                                    setIngredientName(e.target.value)
+                                                }
+                                            />
+                                            <input
+                                                type="text"
+                                                id="ingredientAmount"
+                                                className="block shadow-sm p-2 focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm border border-gray-300 rounded-md"
+                                                placeholder="Amount(ex: 1)"
+                                                value={ingredientAmount}
+                                                onChange={(e) =>
+                                                    setIngredientAmount(e.target.value)
+                                                }
+                                            />
+                                            <select
+                                                className="block shadow-sm p-2 focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm border border-gray-300 rounded-md"
+                                                value={measurement}
+                                                onChange={(e) =>
+                                                    setMeasurement(e.target.value)
+                                                }>
+                                                {
+                                                    measurements.map((measure) => {
+                                                        return <option
+                                                            key={measure}
+                                                            value={measure}>{measure}
+                                                        </option>
+                                                    })
+                                                }
+                                            </select>
 
-                                                                    <div className="">
-                                                                        <button
-                                                                            type="button"
-                                                                            className="bg-white inline-flex items-center px-2 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
-                                                                        >
-                                                                            <MinusIcon
-                                                                                className="-ml-2 mr-1 h-5 w-5 text-gray-400"
-                                                                                aria-hidden="true"
-                                                                            />
-                                                                            <span>
-                                                                                Remove
-                                                                            </span>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        )
-                                                    )}
-                                                </ul>
-                                            </div>
+                                            <button type="button" className="bg-white inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500" onClick={onAddIngredientClick}>
+                                                <PlusIcon
+                                                    className="-ml-2 mr-1 h-5 w-5 text-gray-400"
+                                                    aria-hidden="true"
+                                                />
+                                                <span>Add</span>
+                                            </button>
+                                        </div>
+                                        <div className="border-b border-gray-200">
+                                            {ingredientList.map((ingredient, idx) => (
+                                                <li key={ingredient} className="py-4 flex">
+                                                    <div className="ml-3 flex flex-grow justify-between">
+                                                        <div>
+                                                            <span className="text-base font-medium text-gray-900">
+                                                                {idx + 1}){" "}
+                                                            </span>
+                                                            <span className="text-base font-medium text-gray-900">
+                                                                {ingredient}
+                                                            </span>
+                                                        </div>
+
+                                                        <div>
+                                                            <button type="button"
+                                                                className="bg-white inline-flex items-center px-2 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+                                                                onClick={() => {
+                                                                        setIngredientList(ingredientList.filter((x) => x !== ingredient));
+                                                                        setIngredients(ingredients.filter((x) => x.ingredient != ingredient.split(" ")[0]));
+                                                                    }
+                                                                }
+                                                            >
+                                                                <MinusIcon
+                                                                    className="-ml-2 mr-1 h-5 w-5 text-gray-400"
+                                                                    aria-hidden="true"
+                                                                />
+                                                                <span>Remove</span>
+                                                            </button>
+                                                        </div>
+
+                                                    </div>
+                                                </li>
+                                            ))}
                                         </div>
                                     </div>
                                     <div>
