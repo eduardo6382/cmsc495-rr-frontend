@@ -12,6 +12,7 @@ export default function Logout({ modal, setModal, id }) {
 
   const handleDeleteClick = () => {
     dispatch(deleteRecipe(id));
+    window.location = "/";
   };
 
   return (
