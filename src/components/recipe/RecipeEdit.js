@@ -76,7 +76,7 @@ export default function RecipeEdit() {
         setEditDir('');
     };
 
-    const onAddIngredientClick = e => {
+    const onAddIngredientClick = () => {
         const value = ingredientName + " " + ingredientAmount + " " + measurement;
         const valueObject = {
             measurement: ingredientAmount,
@@ -85,7 +85,7 @@ export default function RecipeEdit() {
         };
         if (!ingredientList.includes(value)) {
             setIngredientList([...ingredientList, value]);
-            ingredientList.push(valueObject);
+            ingredients.push(valueObject);
         }
         else {
             alert("Item already exists");
@@ -344,7 +344,7 @@ export default function RecipeEdit() {
                                             placeholder="Write a title for your recipe. Something catchy ..."
                                             value={servings}
                                             onChange={(e) =>
-                                                setTitle(e.target.value)
+                                                setServings(e.target.value)
                                             }
                                         />
                                     </div>
@@ -359,7 +359,7 @@ export default function RecipeEdit() {
                                             placeholder="Write a title for your recipe. Something catchy ..."
                                             value={notes}
                                             onChange={(e) =>
-                                                setTitle(e.target.value)
+                                                setNotes(e.target.value)
                                             }
                                         />
                                     </div>
