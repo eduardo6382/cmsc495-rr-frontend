@@ -64,6 +64,8 @@ export default function RecipeEdit() {
 
         dispatch(editRecipe(id, request));
         alert('Recipe Edited!');
+
+        window.location = "/";
     };
 
     // add to the directions array
