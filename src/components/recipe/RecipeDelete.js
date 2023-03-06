@@ -5,16 +5,21 @@ import { ExclamationIcon } from "@heroicons/react/outline";
 
 import { deleteRecipe } from "../../redux/actions/recipes";
 
-export default function Logout({ modal, setModal, id }) {
+export default function RecipeDelete({ modal, setModal, id }) {
   const cancelButtonRef = useRef(null);
 
   const dispatch = useDispatch();
 
   const handleDeleteClick = () => {
     dispatch(deleteRecipe(id));
-    window.location = "/";
+    changeWindow();
   };
 
+  async function changeWindow(){
+    await new Promise (res => setTimeout(res, 100));
+    window.location = "/";
+  }
+ 
   return (
     <Transition.Root show={modal} as={Fragment}>
       <Dialog
