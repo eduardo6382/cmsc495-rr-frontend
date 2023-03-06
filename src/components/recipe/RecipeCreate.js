@@ -340,6 +340,7 @@ export default function RecipeCreate() {
                     />
                   </div>
                 </div>
+
                 <div>
                   <h1 className="text-lg leading-6 font-medium text-gray-900">
                     Notes
