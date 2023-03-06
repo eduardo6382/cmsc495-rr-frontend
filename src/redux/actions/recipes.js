@@ -63,7 +63,7 @@ export const createRecipe = (formData) => (dispatch, getState) => {
     dispatch({ type: RECIPE_LOADING });
 
     axiosInstance
-        .post('/recipes/create/', formData, tokenConfig(getState))
+        .post('/recipes', formData, config)
         .then((res) => {
             dispatch({
                 type: CREATE_RECIPE,

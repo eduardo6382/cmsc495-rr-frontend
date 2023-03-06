@@ -30,7 +30,7 @@ export default function RecipeCard({ recipes }) {
                         </div>
                     </div>
                     <div className="text-xs text-left pb-2 pl-2">
-                        Servings: {recipe.serves}
+                        Servings: {recipe.Servings}
                     </div>
                     <div className="flex justify-between bg-gray-50 px-5 py-3">
                         <div className="text-sm">

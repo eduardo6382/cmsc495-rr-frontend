@@ -16,6 +16,7 @@ export default function RecipeEdit() {
     const [desc, setDesc] = useState('');
     const [directions, setDirections] = useState([]);
     const [ingredients, setIngredients] = useState([]);
+    const [servings, setServings] = useState([]);
     const [notes, setNotes] = useState('');
 
     // track state for the items we can edit in the arrays
@@ -44,6 +45,7 @@ export default function RecipeEdit() {
         setDesc(detailRecipe.response.description);
         setDirections(detailRecipe.response.directions);
         setIngredients(detailRecipe.response.ingredients);
+        setServings(detailRecipe.response.Servings);
         setNotes(detailRecipe.response.notes);
     }, []);
 
@@ -56,6 +58,7 @@ export default function RecipeEdit() {
             description: desc,
             directions: directions,
             ingredients: ingredients,
+            servings: servings,
             notes: notes
         };
 
@@ -82,7 +85,7 @@ export default function RecipeEdit() {
                                 "Cooking is like painting or writing a song.
                                 Just as there are only so many notes or colors,
                                 there are only so many flavors—it’s how you
-                                combine them that sets you apart."
+                                combine them that sets you apart." -Wolfgang Puck
                             </p>
                         </div>
                     </div>
@@ -220,6 +223,124 @@ export default function RecipeEdit() {
                                                 </ul>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div className="space-y-6">
+                                        <div>
+                                            <h1 className="text-lg leading-6 font-medium text-gray-900">
+                                                Ingredients
+                                            </h1>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <div className="space-y-1">
+                                                <div className="flex">
+                                                    <div className="flex-grow">
+                                                        <textarea
+                                                            id="description"
+                                                            name="description"
+                                                            rows={1}
+                                                            className="block w-full shadow-sm p-2 focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm border border-gray-300 rounded-md"
+                                                            placeholder="..."
+                                                            value={editDir}
+                                                            onChange={(
+                                                                event
+                                                            ) => {
+                                                                setEditDir(
+                                                                    event.target
+                                                                        .value
+                                                                );
+                                                            }}
+                                                        />
+                                                    </div>
+                                                    <div className="ml-3">
+                                                        <button
+                                                            type="button"
+                                                            className="bg-white inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+                                                            onClick={
+                                                                onAddDirectionClick
+                                                            }
+                                                        >
+                                                            <PlusIcon
+                                                                className="-ml-2 mr-1 h-5 w-5 text-gray-400"
+                                                                aria-hidden="true"
+                                                            />
+                                                            <span>Add</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="border-b border-gray-200">
+                                                <ul className="divide-y divide-gray-200">
+                                                    {directions.map(
+                                                        (direction, idx) => (
+                                                            <li
+                                                                key={direction}
+                                                                className="py-4 flex"
+                                                            >
+                                                                <div className="ml-3 flex flex-grow justify-between">
+                                                                    <div>
+                                                                        <span className="text-base font-medium text-gray-900">
+                                                                            {idx +
+                                                                                1}
+                                                                            ){' '}
+                                                                        </span>
+                                                                        <span className="text-base font-medium text-gray-900">
+                                                                            {
+                                                                                direction
+                                                                            }
+                                                                        </span>
+                                                                    </div>
+
+                                                                    <div className="">
+                                                                        <button
+                                                                            type="button"
+                                                                            className="bg-white inline-flex items-center px-2 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+                                                                        >
+                                                                            <MinusIcon
+                                                                                className="-ml-2 mr-1 h-5 w-5 text-gray-400"
+                                                                                aria-hidden="true"
+                                                                            />
+                                                                            <span>
+                                                                                Remove
+                                                                            </span>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        )
+                                                    )}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h1 className="text-lg leading-6 font-medium text-gray-900">
+                                            Servings
+                                        </h1>
+                                        <input
+                                            type="text"
+                                            id="servings"
+                                            className="shadow-sm p-2 focus:outline-none focus:ring-teal-500 focus:border-teal-500 mt-1 block w-full border border-gray-300 rounded-md"
+                                            placeholder="Write a title for your recipe. Something catchy ..."
+                                            value={servings}
+                                            onChange={(e) =>
+                                                setTitle(e.target.value)
+                                            }
+                                        />
+                                    </div>
+                                    <div>
+                                        <h1 className="text-lg leading-6 font-medium text-gray-900">
+                                            Notes
+                                        </h1>
+                                        <input
+                                            type="text"
+                                            id="notes"
+                                            className="shadow-sm p-2 focus:outline-none focus:ring-teal-500 focus:border-teal-500 mt-1 block w-full border border-gray-300 rounded-md"
+                                            placeholder="Write a title for your recipe. Something catchy ..."
+                                            value={notes}
+                                            onChange={(e) =>
+                                                setTitle(e.target.value)
+                                            }
+                                        />
                                     </div>
                                 </div>
                                 <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
